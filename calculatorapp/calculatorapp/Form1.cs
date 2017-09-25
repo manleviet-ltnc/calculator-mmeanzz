@@ -17,15 +17,23 @@ namespace calculatorapp
             InitializeComponent();
         }
         bool isTypingNumber = false;
+
+        enum PhepToan { Cong, Tru, Nhan, Chia};
+        PhepToan pheptoan;
+
+        double nho;
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
         private void NhapSo(object sender, EventArgs e)
         {
-            string so = ((Button)sender).Text;
-            NhapSo(so);
+            Button btn = (Button)sender;
+            NhapSo(btn.Text);
         }
+
         private void NhapSo(string so)
         {
             if (isTypingNumber)
@@ -36,10 +44,91 @@ namespace calculatorapp
                 isTypingNumber = true;
             }
         }
-        double nho;
+       
         private void NhapPhepToan(object sender, EventArgs e)
         {
-            nho = double.Parse(lblHienThi.text);
+            TinhKetQua();
+            Button btn = (Button)sender;
+            switch (btn.Text)
+            {
+                case "+":pheptoan = PhepToan.Cong; break;
+                case "-":pheptoan = PhepToan.Tru; break;
+                case "*":pheptoan = PhepToan.Nhan; break;
+                case "/":pheptoan = PhepToan.Chia; break;
+            }
+
+            nho = double.Parse(lblHienThi.Text);
+
+            isTypingNumber = false;
+           
+        }
+
+        private void TinhKetQua()
+        {
+            //tinh toan dua tren: nho, lblHienThi.Text
+            double tam = double.Parse(lblHienThi.Text);
+            double ketqua = 0.0;
+            switch (pheptoan)
+            {
+                case PhepToan.Cong: ketqua = nho + tam; break;
+                case PhepToan.Tru: ketqua = nho - tam; break;
+                case PhepToan.Nhan: ketqua = nho * tam; break;
+                case PhepToan.Chia: ketqua = nho / tam; break;
+            }
+
+            //gan ket qua tinh duoc len lblHienThi
+            lblHienThi.Text = ketqua.ToString();
+        }
+
+        private void btnBang_Click(object sender, EventArgs e)
+        {
+            TinhKetQua();
+            isTypingNumber = false;
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    NhapSo("" + e.KeyChar);
+                    break;
+            }
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (lblHienThi.Text.Length > 0)
+                lblHienThi.Text = lblHienThi.Text.Remove(lblHienThi.Text.Length - 1, 1);
+        }
+
+        private void btnDoiDau_Click(object sender, EventArgs e)
+        {
+            lblHienThi.Text = (-1 * (double.Parse(lblHienThi.Text))).ToString();
+        }
+
+        private void btnNho_Click(object sender, EventArgs e)
+        {
+            double C = double.Parse(lblHienThi.Text);
+        }
+
+        private void btnPhanTram_Click(object sender, EventArgs e)
+        {
+            lblHienThi.Text = ((double.Parse(lblHienThi.Text) / 100)).ToString();
+        }
+
+        private void btnCan_Click(object sender, EventArgs e)
+        {            
+            lblHienThi.Text = (Math.Sqrt(Double.Parse(lblHienThi.Text))).ToString();
         }
     }
 
