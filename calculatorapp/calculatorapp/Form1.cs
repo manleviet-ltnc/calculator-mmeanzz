@@ -18,7 +18,7 @@ namespace calculatorapp
         }
         bool isTypingNumber = false;
 
-        enum PhepToan { Cong, Tru, Nhan, Chia};
+        enum PhepToan { None, Cong, Tru, Nhan, Chia};
         PhepToan pheptoan;
 
         double nho;
@@ -47,20 +47,29 @@ namespace calculatorapp
        
         private void NhapPhepToan(object sender, EventArgs e)
         {
-            TinhKetQua();
+            if (nho != 0)
+                TinhKetQua();
+
             Button btn = (Button)sender;
             switch (btn.Text)
             {
-                case "+":pheptoan = PhepToan.Cong; break;
-                case "-":pheptoan = PhepToan.Tru; break;
-                case "*":pheptoan = PhepToan.Nhan; break;
-                case "/":pheptoan = PhepToan.Chia; break;
+                case "+": pheptoan = PhepToan.Cong; break;
+                case "-": pheptoan = PhepToan.Tru; break;
+                case "*": pheptoan = PhepToan.Nhan; break;
+                case "/": pheptoan = PhepToan.Chia; break;
             }
 
             nho = double.Parse(lblHienThi.Text);
 
             isTypingNumber = false;
-           
+        }
+
+        private void btnBang_Click(object sender, EventArgs e)
+        {
+            TinhKetQua();
+            isTypingNumber = false;
+            nho = 0;
+            pheptoan = PhepToan.None;
         }
 
         private void TinhKetQua()
@@ -78,12 +87,6 @@ namespace calculatorapp
 
             //gan ket qua tinh duoc len lblHienThi
             lblHienThi.Text = ketqua.ToString();
-        }
-
-        private void btnBang_Click(object sender, EventArgs e)
-        {
-            TinhKetQua();
-            isTypingNumber = false;
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -107,8 +110,10 @@ namespace calculatorapp
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (lblHienThi.Text.Length > 0)
+            if (lblHienThi.Text.Length > 1)
                 lblHienThi.Text = lblHienThi.Text.Remove(lblHienThi.Text.Length - 1, 1);
+            else lblHienThi.Text = 0.ToString();
+                   
         }
 
         private void btnDoiDau_Click(object sender, EventArgs e)
