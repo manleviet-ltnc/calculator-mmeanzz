@@ -123,7 +123,8 @@ namespace calculatorapp
 
         private void btnNho_Click(object sender, EventArgs e)
         {
-            double C = double.Parse(lblHienThi.Text);
+          
+            lblHienThi.Text = 0.ToString();
         }
 
         private void btnPhanTram_Click(object sender, EventArgs e)
