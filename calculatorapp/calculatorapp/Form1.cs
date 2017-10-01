@@ -27,19 +27,25 @@ namespace calculatorapp
         {
 
         }
+        private void DauThapPhan(object sender, EventArgs e)
+        {
+
+            lblHienThi.Text = lblHienThi.Text + ".";
+        }
 
         private void NhapSo(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            NhapSo(btn.Text);
+            NhapSo(btn.Text);          
+           
         }
 
         private void NhapSo(string so)
         {
             if (isTypingNumber)
-                lblHienThi.Text = lblHienThi.Text + so;
+                lblHienThi.Text = decimal.Parse(lblHienThi.Text+so).ToString();
             else
-            {
+            {                
                 lblHienThi.Text = so;
                 isTypingNumber = true;
             }
@@ -103,8 +109,8 @@ namespace calculatorapp
                 case '7':
                 case '8':
                 case '9':
-                    NhapSo("" + e.KeyChar);
-                    break;
+                    NhapSo("" + e.KeyChar); break;
+               
             }
         }
 
@@ -113,6 +119,7 @@ namespace calculatorapp
             if (lblHienThi.Text.Length > 1)
                 lblHienThi.Text = lblHienThi.Text.Remove(lblHienThi.Text.Length - 1, 1);
             else lblHienThi.Text = 0.ToString();
+            isTypingNumber = false;
                    
         }
 
@@ -125,6 +132,7 @@ namespace calculatorapp
         {
           
             lblHienThi.Text = 0.ToString();
+            isTypingNumber = false;
         }
 
         private void btnPhanTram_Click(object sender, EventArgs e)
@@ -136,6 +144,16 @@ namespace calculatorapp
         {            
             lblHienThi.Text = (Math.Sqrt(Double.Parse(lblHienThi.Text))).ToString();
         }
-    }
 
+        private void btnThapPhan_Click(object sender, EventArgs e)
+        {
+            if (lblHienThi.Text.Contains("."))
+            {
+                return;
+            }
+            lblHienThi.Text += btnThapPhan.Text;
+        }
+    }
 }
+
+

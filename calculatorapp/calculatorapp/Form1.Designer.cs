@@ -67,10 +67,11 @@
             this.lblHienThi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHienThi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHienThi.Location = new System.Drawing.Point(17, 9);
+            this.lblHienThi.MinimumSize = new System.Drawing.Size(200, 50);
             this.lblHienThi.Name = "lblHienThi";
-            this.lblHienThi.Size = new System.Drawing.Size(199, 40);
+            this.lblHienThi.Size = new System.Drawing.Size(200, 60);
             this.lblHienThi.TabIndex = 0;
-            this.lblHienThi.Text = "0.";
+            this.lblHienThi.Text = "0";
             this.lblHienThi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btn9
@@ -201,6 +202,7 @@
             this.btnThapPhan.TabIndex = 18;
             this.btnThapPhan.Text = ".";
             this.btnThapPhan.UseVisualStyleBackColor = true;
+            this.btnThapPhan.Click += new System.EventHandler(this.btnThapPhan_Click);
             // 
             // btn0
             // 
@@ -302,7 +304,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.NhapSo);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
