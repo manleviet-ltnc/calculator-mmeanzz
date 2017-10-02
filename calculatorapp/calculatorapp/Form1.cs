@@ -27,12 +27,7 @@ namespace calculatorapp
         {
 
         }
-        private void DauThapPhan(object sender, EventArgs e)
-        {
-
-            lblHienThi.Text = lblHienThi.Text + ".";
-        }
-
+ 
         private void NhapSo(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
